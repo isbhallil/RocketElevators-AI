@@ -1,14 +1,14 @@
 {
   "deploy_settings": {
     "default": {
-      "skill_id": "amzn1.ask.skill.c3302561-025a-4a55-92df-842da3c0e1ab",
+      "skill_id": "amzn1.ask.skill.eb00b400-92f2-45ee-b721-dc83ba52bf48",
       "was_cloned": false,
       "merge": {
         "manifest": {
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "dialog-delegate-starter"
+                "uri": "arn:aws:lambda:us-east-1:705779631774:function:rocket-elevator-ai"
               }
             }
           }
@@ -17,11 +17,11 @@
       "in_skill_products": [],
       "resources": {
         "manifest": {
-          "eTag": "eafb0156498a1e9584a0ceea4a46feee"
+          "eTag": "703711d28a7da5292effa94257796199"
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "2b1444eff610c201d920bfc1368ddfb0"
+            "eTag": "6667cca09080298361eb8b7e09757437"
           }
         },
         "lambda": [
@@ -29,12 +29,12 @@
             "alexaUsage": [
               "custom/default"
             ],
-            "arn": "arn:aws:lambda:us-east-1:705779631774:function:dialog-delegate-starter",
+            "arn": "arn:aws:lambda:us-east-1:705779631774:function:rocket-elevator-ai",
             "awsRegion": "us-east-1",
             "codeUri": "./lambda/custom",
-            "functionName": "dialog-delegate-starter",
+            "functionName": "rocket-elevator-ai",
             "handler": "index.handler",
-            "revisionId": "9e1f5401-1cb2-4a51-8bcf-39c937591dda",
+            "revisionId": "52131e09-cf9d-422e-9e7d-73a9e6ccf129",
             "runtime": "nodejs8.10"
           }
         ]

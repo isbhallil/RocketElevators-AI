@@ -2,14 +2,7 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk');
-
-const facts = {
-  'london': "Big Ben is arguably London's most famous landmark. Surprisingly, it is actually meant to go by the name 'The Clock Tower', while Big Ben is the name of the bell.",
-  'paris': "The Eiffel Tower was supposed to be a temporary installation, intended to stand for 20 years after being built for the 1889 World Fair.",
-  'toronto': "Almost 25% of Canada's population lives within a 160 km radius of Toronto.",
-  'sydney': "The Sydney Harbour Bridge is the widest long-span bridge and tallest steel arch bridge in the world, and the 5th longest spanning-arch bridge according to Guinness World Records.",
-  'new delhi': "Delhi is the second most populous city in the world with 25 million inhabitants! Census, in 2015, recorded 18.2 million people living in the city."
-}
+const axios = require('axios');
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -52,11 +45,15 @@ const CreateInterventionHandler = {
   async handle(handlerInput) {
     const responseBuilder = handlerInput.responseBuilder;
     const intentSlots = handlerInput.requestEnvelope.request.intent.slots;
-    const employeeId = intentSlots.employeeId.value;
-    const element = intentSlots.element.value;
-    const elementId = intentSlots.elementId.value;
+    let employeeId = intentSlots.employeeId.value;
+    let element = intentSlots.element.value;
+    let elementId = intentSlots.elementId.value;
+    let employee = '';
+    await ROCKET('get', 'https://mohammedrestapi.azurewebsites.net/api/employees', employeeId)
+    .then(data => employee = data)
+    .catch(error => console.log(error))
 
-    let speechText = `Let's create an intervention on ${element} ${elementId} with employee ${employeeId}`;
+    let speechText = `Let's create an awesome intervention on ${element} ${elementId} with the ${employee.title} ${employee.firstName} ${employee.lastName} with id ${employeeId}`;
 
     return responseBuilder
       .speak(speechText)
@@ -70,7 +67,7 @@ const HelpIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'You can say tell me a fact about london';
+    const speechText = 'You can say create intervention';
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -119,18 +116,6 @@ const ErrorHandler = {
   },
 };
 
-function slotValue(slot, useId) {
-  if (slot.value == undefined) {
-    return "undefined";
-  }
-  let value = slot.value;
-  let resolution = (slot.resolutions && slot.resolutions.resolutionsPerAuthority && slot.resolutions.resolutionsPerAuthority.length > 0) ? slot.resolutions.resolutionsPerAuthority[0] : null;
-  if (resolution && resolution.status.code == 'ER_SUCCESS_MATCH') {
-    let resolutionValue = resolution.values[0].value;
-    value = resolutionValue.id && useId ? resolutionValue.id : resolutionValue.name;
-  }
-  return value;
-}
 
 const skillBuilder = Alexa.SkillBuilders.standard();
 
@@ -145,3 +130,20 @@ exports.handler = skillBuilder
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
+
+
+const ROCKET = (method, url, args) => {
+  return new Promise((resolve, reject) => {
+    header = {
+      method: method,
+      url: `${url}/${args}`,
+      responseType: 'json'
+    }
+
+    axios(header)
+      .then(function (response) {
+        return resolve(response.data)
+      })
+      .catch(error => reject(error))
+  });
+}

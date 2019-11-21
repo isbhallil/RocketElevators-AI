@@ -29,11 +29,11 @@ const LaunchRequestHandler = {
   },
 };
 
-const InProgressfactIntentHandler = {
+const InProgressCreateInterventionHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'IntentRequest' &&
-      request.intent.name === 'factIntent' &&
+      request.intent.name === 'CreateInterventionIntent' &&
       request.dialogState !== 'COMPLETED';
   },
   handle(handlerInput) {
@@ -44,17 +44,20 @@ const InProgressfactIntentHandler = {
   },
 };
 
-const factIntentHandler = {
+const CreateInterventionHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'factIntent';
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+      handlerInput.requestEnvelope.request.intent.name === 'CreateInterventionIntent';
   },
   async handle(handlerInput) {
     const responseBuilder = handlerInput.responseBuilder;
-    const city = slotValue(handlerInput.requestEnvelope.request.intent.slots.city);
+    const intentSlots = handlerInput.requestEnvelope.request.intent.slots;
+    const employeeId = intentSlots.employeeId.value;
+    const element = intentSlots.element.value;
+    const elementId = intentSlots.elementId.value;
 
-    let speechText = `Here's a fact about ${city} - ${facts[city]}`;
-    
+    let speechText = `Let's create an intervention on ${element} ${elementId} with employee ${employeeId}`;
+
     return responseBuilder
       .speak(speechText)
       .getResponse();
@@ -63,8 +66,8 @@ const factIntentHandler = {
 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+      handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
     const speechText = 'You can say tell me a fact about london';
@@ -78,9 +81,9 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+      (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
+        handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
     const speechText = 'Goodbye!';
@@ -116,15 +119,15 @@ const ErrorHandler = {
   },
 };
 
-function slotValue(slot, useId){
-  if(slot.value == undefined){
-      return "undefined";
+function slotValue(slot, useId) {
+  if (slot.value == undefined) {
+    return "undefined";
   }
   let value = slot.value;
   let resolution = (slot.resolutions && slot.resolutions.resolutionsPerAuthority && slot.resolutions.resolutionsPerAuthority.length > 0) ? slot.resolutions.resolutionsPerAuthority[0] : null;
-  if(resolution && resolution.status.code == 'ER_SUCCESS_MATCH'){
-      let resolutionValue = resolution.values[0].value;
-      value = resolutionValue.id && useId ? resolutionValue.id : resolutionValue.name;
+  if (resolution && resolution.status.code == 'ER_SUCCESS_MATCH') {
+    let resolutionValue = resolution.values[0].value;
+    value = resolutionValue.id && useId ? resolutionValue.id : resolutionValue.name;
   }
   return value;
 }
@@ -134,13 +137,11 @@ const skillBuilder = Alexa.SkillBuilders.standard();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    InProgressfactIntentHandler,
-    factIntentHandler,
+    InProgressCreateInterventionHandler,
+    CreateInterventionHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
-
-  

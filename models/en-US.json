@@ -5,9 +5,7 @@
       "intents": [
         {
           "name": "AMAZON.NavigateHomeIntent",
-          "samples": [
-
-          ]
+          "samples": []
         },
         {
           "name": "AMAZON.CancelIntent",
@@ -22,129 +20,172 @@
           "samples": []
         },
         {
-          "name": "factIntent",
+          "name": "CreateInterventionIntent",
           "slots": [
             {
-              "name": "city",
-              "type": "cityName",
+              "name": "elementId",
+              "type": "AMAZON.NUMBER",
               "samples": [
-                "give me a fact about {city}",
-                "tell me some facts about {city}",
-                "{city}"
+                "it's for {element} {elementId}",
+                "it's for {element} {elementId} and employee {employeeId}",
+                "yesy it's {elementId}",
+                "the element id is {elementId}",
+                "{elementId}",
+                "it's {elementId} with employee {elementId}",
+                "it's {elementId} "
+              ]
+            },
+            {
+              "name": "employeeId",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "it will be employee {employeeId} on {element} {elementId}",
+                "it will be employee {employeeId}",
+                "yes it's {employeeId}",
+                "it's {employeeId}"
+              ]
+            },
+            {
+              "name": "element",
+              "type": "LIST_OF_ELEMENTS",
+              "samples": [
+                "it's for {element} {elementId}",
+                "it's for {element} {elementId} and employee {employeeId}",
+                "it will be employee {employeeId} that will work on {element} {elementId}",
+                "it's the {element} {elementId}",
+                "it's the {element}"
               ]
             }
           ],
           "samples": [
-            "give me a fact",
-            "get a fact",
-            "tell me about {city}",
-            "get me a fact for {city}",
-            "tell me a fact",
-            "tell me a fact about {city}"
+            "create intervention with the employee {employeeId}",
+            "create intervention",
+            "create intervention for {element} {elementId}",
+            "create intervention with employee {employeeId}",
+            "create intervention for {element} {elementId} with employee {employeeId}"
           ]
         }
       ],
       "types": [
         {
+          "name": "LIST_OF_ELEMENTS",
           "values": [
             {
               "name": {
-                "value": "paris"
+                "value": "battery",
+                "synonyms": ["batteries"]
               }
             },
             {
               "name": {
-                "value": "toronto"
+                "value": "column",
+                "synonyms": ["columns"]
               }
             },
             {
               "name": {
-                "value": "sydney"
-              }
-            },
-            {
-              "name": {
-                "value": "london"
-              }
-            },
-            {
-              "name": {
-                "value": "new delhi",
-                "synonyms": [
-                  "delhi"
-                ]
+                "value": "elevator",
+                "synonyms": ["elevators"]
               }
             }
-          ],
-          "name": "cityName"
+          ]
         }
       ]
     },
     "dialog": {
       "intents": [
         {
-          "name": "factIntent",
+          "name": "CreateInterventionIntent",
           "confirmationRequired": false,
+          "prompts": {},
           "slots": [
             {
-              "name": "city",
-              "type": "cityName",
-              "elicitationRequired": true,
+              "name": "elementId",
+              "type": "AMAZON.NUMBER",
               "confirmationRequired": false,
+              "elicitationRequired": true,
               "prompts": {
-                "elicitation": "Elicit.Slot.251925459829.983270759031"
+                "elicitation": "Elicit.Slot.1128960260810.229652566437"
+              }
+            },
+            {
+              "name": "employeeId",
+              "type": "AMAZON.NUMBER",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1128960260810.668013650742"
+              }
+            },
+            {
+              "name": "element",
+              "type": "LIST_OF_ELEMENTS",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1128960260810.786569496331"
               }
             }
           ]
         }
-      ]
+      ],
+      "delegationStrategy": "SKILL_RESPONSE"
     },
     "prompts": [
-      {
-        "id": "Elicit.Slot.1162780729786.1432530920282",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "which city are you going to?"
-          },
-          {
-            "type": "PlainText",
-            "value": "Where are you going?"
-          }
-        ]
-      },
-      {
-        "id": "Elicit.Slot.1162780729786.1143025724798",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "where are you starting your trip?"
-          },
-          {
-            "type": "PlainText",
-            "value": "What city are you leaving from?"
-          }
-        ]
-      },
-      {
-        "id": "Elicit.Slot.1162780729786.801508773141",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "what date are you flying out?"
-          },
-          {
-            "type": "PlainText",
-            "value": "When will you start this trip?"
-          }
-        ]
-      },
       {
         "id": "Elicit.Slot.251925459829.983270759031",
         "variations": [
           {
             "type": "PlainText",
-            "value": "which city do you want to know the fact about,  you can say london or paris or new delhi?"
+            "value": "I need the customer id to continue, may you give it to me ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.983270759031.251925459829",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "I need the building id to continue, may you give it to me ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1128960260810.229652566437",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "In order to continu I need the ID of the element you trying to create an intervention for, can i have it ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what's the id of that element ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1128960260810.668013650742",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "can i have the employee id ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what is the employee id ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what's the employee ID that will be responsible for that intervention ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1128960260810.786569496331",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "what is the element you requesting an intervention for ?"
           }
         ]
       }

@@ -3,7 +3,7 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "say alexa open dialog delegate starter",
+          "summary": "say alexa open rocket ai",
           "examplePhrases": [
             "Alexa open dialog delegate starter",
             "tell me a fact",
@@ -16,8 +16,8 @@
             "skill",
             "templates"
           ],
-          "name": "Dialog Delegate Starter",
-          "description": "say alexa open dialog delegate starter\nthen say tell me a fact",
+          "name": "RocketElevator-AI",
+          "description": "say alexa open rocket ai\nthen say tell me a fact",
           "smallIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-sm.png",
           "largeIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-lg.png"
         }

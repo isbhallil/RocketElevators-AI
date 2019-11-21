@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "template twelve",
+      "invocationName": "rocket ai",
       "intents": [
         {
           "name": "AMAZON.NavigateHomeIntent",

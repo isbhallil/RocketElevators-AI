@@ -2,129 +2,14 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk');
-const axios = require('axios');
-const client = require('twilio')("AC221e628d23f16051361563539e040a4b", "e34f37f152128864a8d239e6817d25c3");
 
-const LaunchRequestHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
-  },
-  async handle(handlerInput) {
-
-    const responseBuilder = handlerInput.responseBuilder;
-
-    let speechText = 'Hello their, ou can say create intervention or send message to employee to see Rocket AI in action.';
-    let repromptText = 'Hi ! say a command to see Rocket Ai in action.';
-
-    return responseBuilder
-      .speak(speechText)
-      .reprompt(repromptText)
-      .getResponse();
-  },
-};
-
-const InProgressCreateInterventionHandler = {
-  canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    return request.type === 'IntentRequest' &&
-      request.intent.name === 'CreateInterventionIntent' &&
-      request.dialogState !== 'COMPLETED';
-  },
-  handle(handlerInput) {
-    const currentIntent = handlerInput.requestEnvelope.request.intent;
-    return handlerInput.responseBuilder
-      .addDelegateDirective(currentIntent)
-      .getResponse();
-  },
-};
-
-const CreateInterventionHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-      handlerInput.requestEnvelope.request.intent.name === 'CreateInterventionIntent';
-  },
-  async handle(handlerInput) {
-    const responseBuilder = handlerInput.responseBuilder;
-    const intentSlots = handlerInput.requestEnvelope.request.intent.slots;
-    let employeeId = intentSlots.employeeId.value;
-    let element = intentSlots.element.value;
-    let elementId = intentSlots.elementId.value;
-    let employee = '';
-    await ROCKET('get', 'https://mohammedrestapi.azurewebsites.net/api/employees', employeeId)
-    .then(data => employee = data)
-    .catch(error => console.log(error))
-
-    let speechText = `Thank you! I just created an intervention on ${element} ${elementId} with the ${employee.title} ${employee.firstName} ${employee.lastName} with id ${employeeId}`;
-    let techMessage = `A new intervention on ${element} ${elementId} was created, you're the tech assigned to it`;
-
-    await client.messages
-    .create({
-        body: techMessage,
-        from: "+18722411501",
-        to: "+14182654300"
-    })
-
-    return responseBuilder
-      .speak(speechText)
-      .getResponse();
-  },
-};
-
-const HelpIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-      handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
-  },
-  handle(handlerInput) {
-    const speechText = 'You can say create intervention';
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .getResponse();
-  },
-};
-
-const CancelAndStopIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-      (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
-        handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
-  },
-  handle(handlerInput) {
-    const speechText = 'Goodbye!';
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .getResponse();
-  },
-};
-
-const SessionEndedRequestHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
-  },
-  handle(handlerInput) {
-    console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
-
-    return handlerInput.responseBuilder.getResponse();
-  },
-};
-
-const ErrorHandler = {
-  canHandle() {
-    return true;
-  },
-  handle(handlerInput, error) {
-    console.log(`Error handled: ${error.message}`);
-
-    return handlerInput.responseBuilder
-      .speak('Sorry, I can\'t understand the command. Please say again.')
-      .reprompt('Sorry, I can\'t understand the command. Please say again.')
-      .getResponse();
-  },
-};
-
+const LaunchRequestHandler = require('./handlers/launchRequestHandler');
+const InProgressCreateInterventionHandler = require('./handlers/inProgressCreateInterventionHandler');
+const CreateInterventionHandler = require('./handlers/createInterventionHandler');
+const HelpIntentHandler = require('./handlers/helpIntentHandler');
+const CancelAndStopIntentHandler = require('./handlers/cancelAndStopIntentHandler');
+const SessionEndedRequestHandler = require('./handlers/sessionEndedRequestHandler');
+const ErrorHandler = require('./handlers/errorHandler');
 
 const skillBuilder = Alexa.SkillBuilders.standard();
 
@@ -139,20 +24,3 @@ exports.handler = skillBuilder
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
-
-
-const ROCKET = (method, url, args) => {
-  return new Promise((resolve, reject) => {
-    header = {
-      method: method,
-      url: `${url}/${args}`,
-      responseType: 'json'
-    }
-
-    axios(header)
-      .then(function (response) {
-        return resolve(response.data)
-      })
-      .catch(error => reject(error))
-  });
-}

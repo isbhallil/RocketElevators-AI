@@ -3,6 +3,7 @@
 
 const Alexa = require('ask-sdk');
 const axios = require('axios');
+const client = require('twilio')("AC221e628d23f16051361563539e040a4b", "e34f37f152128864a8d239e6817d25c3");
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -12,8 +13,8 @@ const LaunchRequestHandler = {
 
     const responseBuilder = handlerInput.responseBuilder;
 
-    let speechText = 'Say tell me a fact to see the dialog delegate in action.';
-    let repromptText = 'Say tell me a fact to see the dialog delegate in action.';
+    let speechText = 'Hello their, ou can say create intervention or send message to employee to see Rocket AI in action.';
+    let repromptText = 'Hi ! say a command to see Rocket Ai in action.';
 
     return responseBuilder
       .speak(speechText)
@@ -53,7 +54,15 @@ const CreateInterventionHandler = {
     .then(data => employee = data)
     .catch(error => console.log(error))
 
-    let speechText = `Let's create an awesome intervention on ${element} ${elementId} with the ${employee.title} ${employee.firstName} ${employee.lastName} with id ${employeeId}`;
+    let speechText = `Thank you! I just created an intervention on ${element} ${elementId} with the ${employee.title} ${employee.firstName} ${employee.lastName} with id ${employeeId}`;
+    let techMessage = `A new intervention on ${element} ${elementId} was created, you're the tech assigned to it`;
+
+    await client.messages
+    .create({
+        body: techMessage,
+        from: "+18722411501",
+        to: "+14182654300"
+    })
 
     return responseBuilder
       .speak(speechText)

@@ -4,6 +4,7 @@
 const Alexa = require('ask-sdk');
 
 const LaunchRequestHandler = require('./handlers/launchRequestHandler');
+const GetSummaryIntentHandler = require('./handlers/getSummaryIntentHandler');
 const InProgressCreateInterventionHandler = require('./handlers/inProgressCreateInterventionHandler');
 const CreateInterventionHandler = require('./handlers/createInterventionHandler');
 const HelpIntentHandler = require('./handlers/helpIntentHandler');
@@ -16,6 +17,7 @@ const skillBuilder = Alexa.SkillBuilders.standard();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
+    GetSummaryIntentHandler,
     InProgressCreateInterventionHandler,
     CreateInterventionHandler,
     HelpIntentHandler,

@@ -14,14 +14,19 @@ module.exports = {
     let element = intentSlots.element.value;
     let elementId = intentSlots.elementId.value;
     let isSendMessage = isYes(intentSlots.isSendMessage.value);
-    let employee = '';
+    let employee = null;
+    let intervention = null;
+    let speechText = 'something went wrong, please try again !'
 
-    await http('get', 'https://mohammedrestapi.azurewebsites.net/api/employees', employeeId)
-    .then(data => employee = data)
-    .catch(error => console.log(error))
+    employee = await http('get', 'https://mohammedrestapi.azurewebsites.net/api/employees', employeeId)
 
-    let speechText = `Thank you! I just created an intervention on ${element} ${elementId} with ${employee.firstName} ${employee.lastName}`;
+    intervention = await http("post", `https://mohammedrestapi.azurewebsites.net/api/interventions`, `element=${element}&elementId=${elementId}&employeeId=${employeeId}`)
 
+    if (employee != null) {
+      speechText = `Thank you! I just created an intervention on ${element} ${elementId} with ${employee.firstName} ${employee.lastName}`;
+    }
+
+    // if (isSendMessage && intervention != null) {
     if (isSendMessage) {
       let techMessage = `A new intervention on ${element} ${elementId} was created, you're the tech assigned to it`;
       speechText = `Thank you! I just created an intervention on ${element} ${elementId} and sent a text message to ${employee.firstName} ${employee.lastName}`;

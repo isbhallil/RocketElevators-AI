@@ -3,9 +3,9 @@ const axios = require('axios');
 module.exports = (method, url, args) => {
     return new Promise((resolve, reject) => {
         header = {
-        method: method,
-        url: `${url}/${args}`,
-        responseType: 'json'
+            method: method,
+            url: `${url}/${args}`,
+            responseType: 'json'
         }
 
         axios(header)

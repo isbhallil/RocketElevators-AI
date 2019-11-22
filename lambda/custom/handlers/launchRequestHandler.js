@@ -1,4 +1,3 @@
-const Alexa = require('ask-sdk');
 module.exports = {
     canHandle(handlerInput) {
       return handlerInput.requestEnvelope.request.type === 'LaunchRequest';

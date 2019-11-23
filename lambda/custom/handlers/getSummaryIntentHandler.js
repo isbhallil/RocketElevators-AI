@@ -2,8 +2,8 @@ const http = require('../modules/http');
 
 module.exports = {
     canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-        handlerInput.requestEnvelope.request.intent.name === 'GetSummaryIntent';
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+            handlerInput.requestEnvelope.request.intent.name === 'GetSummaryIntent';
     },
     async handle(handlerInput) {
         summary = await http('get', 'https://mohammedrestapi.azurewebsites.net/api/alexa', 'summary')
@@ -19,5 +19,5 @@ module.exports = {
         return handlerInput.responseBuilder
             .speak(speechText)
             .getResponse();
-    },
+    }
 };

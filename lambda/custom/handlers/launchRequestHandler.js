@@ -6,7 +6,7 @@ module.exports = {
 
       const responseBuilder = handlerInput.responseBuilder;
 
-      let speechText = 'Hello their, you can say create intervention or send message to employee to see Rocket AI in action.';
+      let speechText = 'Hello their, you can say create intervention or tell me about employee 51 to see Rocket AI in action.';
       let repromptText = 'Hi ! say a command to see Rocket Ai in action.';
 
       return responseBuilder

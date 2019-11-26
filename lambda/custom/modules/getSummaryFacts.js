@@ -1,14 +1,6 @@
 module.exports = async () => {
     let outputSpeech = "Greeting, ";
 
-// Greetings
-// There are currently XXX elevators deployed in the XXX buildings of your XXX customers
-// Currently, XXX elevators are not in Running Status and are being serviced
-// XXX Batteries are deployed across XXX cities
-// On another note you currently have XXX quotes awaiting processing
-// You also have XXX leads in your contact requests
-
-
     let elevatorsCount = await http('get', "https://mohammedrestapi.azurewebsites.net/api/");
     let elevatorAllData = await http('get', "https://mohammedrestapi.azurewebsites.net/api/");
     let buildingsCount = await http('get', "https://mohammedrestapi.azurewebsites.net/api/");

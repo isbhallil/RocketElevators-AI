@@ -1,10 +1,12 @@
 const axios = require('axios');
 
-module.exports = (method, url, args) => {
+module.exports = (method, endpoint, args) => {
+    let url = "https://mohammedrocketelevatorsrestapi.azurewebsites.net"
+
     return new Promise((resolve, reject) => {
         header = {
             method: method,
-            url: `${url}/${args}`,
+            url: `${url}/${endpoint}/${args}`,
             responseType: 'json'
         }
 

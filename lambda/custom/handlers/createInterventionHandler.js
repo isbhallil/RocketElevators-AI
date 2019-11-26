@@ -18,9 +18,9 @@ module.exports = {
     let intervention = null;
     let speechText = 'something went wrong, please try again !'
 
-    employee = await http('get', 'https://mohammedrestapi.azurewebsites.net/api/employees', employeeId)
+    employee = await http('get', 'api/employees', employeeId)
 
-    intervention = await http("post", `https://mohammedrestapi.azurewebsites.net/api/interventions`, `element=${entity}&elementId=${entityID}&employeeId=${employeeId}`)
+    intervention = await http("post", `api/interventions`, `element=${entity}&elementId=${entityID}&employeeId=${employeeId}`)
 
     if (employee != null && intervention != null) {
       speechText = `Thank you! I just created an intervention on ${entity} ${entityID} with ${employee.firstName} ${employee.lastName}`;

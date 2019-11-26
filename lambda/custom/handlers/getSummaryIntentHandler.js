@@ -6,7 +6,7 @@ module.exports = {
             handlerInput.requestEnvelope.request.intent.name === 'GetSummaryIntent';
     },
     async handle(handlerInput) {
-        summary = await http('get', 'https://mohammedrestapi.azurewebsites.net/api/alexa', 'summary')
+        summary = await http('get', 'api/alexa/summary', '')
 
         let speechText = `Greetings
             There are currently ${summary.elevatorsCount} elevators deployed in the ${summary.elevatorsCount} buildings of your ${summary.customerCount} customers

@@ -17,6 +17,6 @@ const getModelFrom = (entity) => {
 
 module.exports = async (entity, id, property) => {
     let model = getModelFrom(entity);
-    let element = await http('get', `https://mohammedrestapi.azurewebsites.net/api/`, `${model}/${id}`)
+    let element = await http('get', `/api`, `${model}/${id}`)
     return element[property]
 }

@@ -2,8 +2,7 @@
     "interactionModel": {
         "languageModel": {
             "invocationName": "rocket ai",
-            "intents": [
-                {
+            "intents": [{
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
                 },
@@ -21,8 +20,7 @@
                 },
                 {
                     "name": "CreateInterventionIntent",
-                    "slots": [
-                        {
+                    "slots": [{
                             "name": "entityID",
                             "type": "AMAZON.NUMBER",
                             "samples": [
@@ -80,8 +78,7 @@
                 },
                 {
                     "name": "GetElementInfoIntent",
-                    "slots": [
-                        {
+                    "slots": [{
                             "name": "entity",
                             "type": "ENTITIES",
                             "samples": [
@@ -116,14 +113,15 @@
                         }
                     ],
                     "samples": [
-                       "give me the {propName} of {entity} {entityID}",
-                       "can you give me {propName} about {entity} {entityID}",
-                       "what's the {propName} of {entity} {entityID}",
-                       "tell me the {propName} of {entity} {entityID}",
-                       "what is the state",
-                       "what's the state of {entity} {entityID}",
-                       "can you give me info about {entity} {entityID}",
-                       "tell me about {entity} {entityID}"
+                        "tell me about {entity} {entityID} {propName}",
+                        "give me the {propName} of {entity} {entityID}",
+                        "can you give me {propName} about {entity} {entityID}",
+                        "what's the {propName} of {entity} {entityID}",
+                        "tell me the {propName} of {entity} {entityID}",
+                        "what is the state",
+                        "what's the state of {entity} {entityID}",
+                        "can you give me info about {entity} {entityID}",
+                        "tell me about {entity} {entityID}"
                     ]
                 },
                 {
@@ -134,11 +132,9 @@
                     ]
                 }
             ],
-            "types": [
-                {
+            "types": [{
                     "name": "BOOLEAN",
-                    "values": [
-                        {
+                    "values": [{
                             "name": {
                                 "value": "yes",
                                 "synonyms": [
@@ -165,23 +161,179 @@
                 },
                 {
                     "name": "PROPERTIES",
-                    "values": [
+                    "values": [{
+                            "id": "employeeId",
+                            "name": {
+                                "value": "employee id"
+                            }
+                        },
                         {
+                            "id": "buildingId",
+                            "name": {
+                                "value": "building id"
+                            }
+                        },
+                        {
+                            "id": "batteryId",
+                            "name": {
+                                "value": "battery id"
+                            }
+                        },
+                        {
+                            "id": "columnId",
+                            "name": {
+                                "value": "column id"
+                            }
+                        },
+                        {
+                            "id": "serialNumber",
+                            "name": {
+                                "value": "serial number"
+                            }
+                        },
+                        {
+                            "id": "modelType",
+                            "name": {
+                                "value": "model type"
+                            }
+                        },
+                        {
+                            "id": "dateOfInspection",
+                            "name": {
+                                "value": "inspection date"
+                            }
+                        },
+                        {
+                            "id": "dateOfInstallation",
+                            "name": {
+                                "value": "installation date"
+                            }
+                        },
+                        {
+                            "id": "inspectionCertificate",
+                            "name": {
+                                "value": "certificate"
+                            }
+                        },
+                        {
+                            "id": "floors",
+                            "name": {
+                                "value": "floors"
+                            }
+                        },
+                        {
+                            "id": "userId",
+                            "name": {
+                                "value": "user id"
+                            }
+                        },
+                        {
+                            "id": "title",
+                            "name": {
+                                "value": "title"
+                            }
+                        },
+                        {
+                            "id": "city",
+                            "name": {
+                                "value": "city"
+                            }
+                        },
+                        {
+                            "id": "street",
+                            "name": {
+                                "value": "street"
+                            }
+                        },
+                        {
+                            "id": "addressId",
+                            "name": {
+                                "value": "address id"
+                            }
+                        },
+                        {
+                            "id": "customerId",
+                            "name": {
+                                "value": "customer id"
+                            }
+                        },
+                        {
+                            "id": "buildingType",
+                            "name": {
+                                "value": "building type"
+                            }
+                        },
+                        {
+                            "id": "phoneNumberAdminPerson",
+                            "name": {
+                                "value": "admin phone number"
+                            }
+                        },
+                        {
+                            "id": "phoneNumberTechPerson",
+                            "name": {
+                                "value": "tech phone number"
+                            }
+                        },
+                        {
+                            "id": "emailAdminPerson",
+                            "name": {
+                                "value": "admin email",
+                                "synonyms": [
+                                    "admin email address"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "emailTechPerson",
+                            "name": {
+                                "value": "tech email ",
+                                "synonyms": [
+                                    "tech email address"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "lastName",
+                            "name": {
+                                "value": "last name",
+                                "synonyms": [
+                                    "family name"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "firstName",
+                            "name": {
+                                "value": "first name",
+                                "synonyms": [
+                                    "name"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "informations",
                             "name": {
                                 "value": "informations"
                             }
                         },
                         {
+                            "id": "notes",
                             "name": {
                                 "value": "notes"
                             }
                         },
                         {
+                            "id": "email",
                             "name": {
-                                "value": "email"
+                                "value": "email",
+                                "synonyms": [
+                                    "email address"
+                                ]
                             }
                         },
                         {
+                            "id": "status",
                             "name": {
                                 "value": "status"
                             }
@@ -190,7 +342,16 @@
                 },
                 {
                     "name": "ENTITIES",
-                    "values": [
+                    "values": [{
+                            "name": {
+                                "value": "address"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "building"
+                            }
+                        },
                         {
                             "name": {
                                 "value": "customer"
@@ -226,16 +387,14 @@
             ]
         },
         "dialog": {
-            "intents": [
-                {
+            "intents": [{
                     "name": "GetElementInfoIntent",
                     "confirmationRequired": false,
                     "prompts": {},
-                    "slots": [
-                        {
+                    "slots": [{
                             "name": "entity",
                             "type": "ENTITIES",
-                            "confirmationRequired":  false,
+                            "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Slot.501836848727.427035787767"
@@ -244,7 +403,7 @@
                         {
                             "name": "entityID",
                             "type": "AMAZON.NUMBER",
-                            "confirmationRequired":  false,
+                            "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Slot.501836848727.735956876853"
@@ -253,7 +412,7 @@
                         {
                             "name": "propName",
                             "type": "PROPERTIES",
-                            "confirmationRequired":  false,
+                            "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Slot.501836848727.889738133545"
@@ -265,8 +424,7 @@
                     "name": "CreateInterventionIntent",
                     "confirmationRequired": false,
                     "prompts": {},
-                    "slots": [
-                        {
+                    "slots": [{
                             "name": "entityID",
                             "type": "AMAZON.NUMBER",
                             "confirmationRequired": false,
@@ -307,29 +465,23 @@
             ],
             "delegationStrategy": "SKILL_RESPONSE"
         },
-        "prompts": [
-            {
+        "prompts": [{
                 "id": "Elicit.Slot.251925459829.983270759031",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "I need the customer id to continue, may you give it to me ?"
-                    }
-                ]
+                "variations": [{
+                    "type": "PlainText",
+                    "value": "I need the customer id to continue, may you give it to me ?"
+                }]
             },
             {
                 "id": "Elicit.Slot.983270759031.251925459829",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "I need the building id to continue, may you give it to me ?"
-                    }
-                ]
+                "variations": [{
+                    "type": "PlainText",
+                    "value": "I need the building id to continue, may you give it to me ?"
+                }]
             },
             {
                 "id": "Elicit.Slot.1128960260810.229652566437",
-                "variations": [
-                    {
+                "variations": [{
                         "type": "PlainText",
                         "value": "In order to continu I need the ID of the element you trying to create an intervention for, can i have it ?"
                     },
@@ -341,8 +493,7 @@
             },
             {
                 "id": "Elicit.Slot.1128960260810.668013650742",
-                "variations": [
-                    {
+                "variations": [{
                         "type": "PlainText",
                         "value": "can i have the employee id ?"
                     },
@@ -358,8 +509,7 @@
             },
             {
                 "id": "Elicit.Slot.1128960260810.786569496331",
-                "variations": [
-                    {
+                "variations": [{
                         "type": "PlainText",
                         "value": "On witch element of the building ?"
                     },
@@ -371,8 +521,7 @@
             },
             {
                 "id": "Elicit.Slot.1441922300109.1160129605896",
-                "variations": [
-                    {
+                "variations": [{
                         "type": "PlainText",
                         "value": "Do you want to send a message to notify the employee ?"
                     },
@@ -383,9 +532,8 @@
                 ]
             },
             {
-                "id":  "Elicit.Slot.501836848727.427035787767",
-                "variations": [
-                    {
+                "id": "Elicit.Slot.501836848727.427035787767",
+                "variations": [{
                         "type": "PlainText",
                         "value": "I need the name of that element, may you give it to me"
                     },
@@ -400,9 +548,8 @@
                 ]
             },
             {
-                "id":  "Elicit.Slot.501836848727.735956876853",
-                "variations": [
-                    {
+                "id": "Elicit.Slot.501836848727.735956876853",
+                "variations": [{
                         "type": "PlainText",
                         "value": "what's the id of that element"
                     },
@@ -418,8 +565,7 @@
             },
             {
                 "id": "Elicit.Slot.501836848727.889738133545",
-                "variations": [
-                    {
+                "variations": [{
                         "type": "PlainText",
                         "value": "can you tell me the property you want to know about"
                     },

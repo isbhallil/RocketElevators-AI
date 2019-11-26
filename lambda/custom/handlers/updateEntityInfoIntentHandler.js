@@ -14,7 +14,7 @@ module.exports = {
 		let propName = intentSlots.propName.value;
 		let newValue = intentSlots.newValue.value
 
-		let requestedEntity = await http('put', 'https://mohammedrestapi.azurewebsites.net/api/alexa', `info/entity=${entity}&entityID=${entityID}&paramName=${paramName}&newValue=${newValue}`)
+		let requestedEntity = await http('put', 'api/alexa', `info/entity=${entity}&entityID=${entityID}&paramName=${paramName}&newValue=${newValue}`)
 		let speechText = `here's the ${propName} for that ${entity} ${entityID} is ${requestedEntity[propName]}`
 
 		return responseBuilder

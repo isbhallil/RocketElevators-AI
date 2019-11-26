@@ -79,6 +79,54 @@
                     ]
                 },
                 {
+                    "name": "GetElementInfoIntent",
+                    "slots": [
+                        {
+                            "name": "entity",
+                            "type": "ENTITIES",
+                            "samples": [
+                                "it's for {entity} {entityID}",
+                                "it's for an {entity}",
+                                "yes it's for an {entity}",
+                                "it's {entity} {entityID}",
+                                "okey it's {entity}"
+                            ]
+                        },
+                        {
+                            "name": "entityID",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "it's the id {entityID}",
+                                "it's for {entity} {entityID}",
+                                "yes it's {entityID}",
+                                "{entityID}",
+                                "it's {entityID}"
+                            ]
+                        },
+                        {
+                            "name": "propName",
+                            "type": "PROPERTIES",
+                            "samples": [
+                                "it's the {propName} of {entity} {entityID}",
+                                "it's for {entity} {propName}",
+                                "yes it's for {propName}",
+                                "it's {propName}",
+                                "{propName}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                       "give me the {propName} of {entity} {entityID}",
+                       "can you give me {propName} about {entity} {entityID}",
+                       "what's the {propName} of {entity} {entityID}",
+                       "tell me the {propName} of {entity} {entityID}",
+                       "what is the state",
+                       "what's the state of {entity} {entityID}",
+                       "can you give me info about {entity} {entityID}",
+                       "tell me about {entity} {entityID}"
+                    ]
+                },
+                {
                     "name": "GetSummaryIntent",
                     "slots": [],
                     "samples": [
@@ -179,6 +227,40 @@
         },
         "dialog": {
             "intents": [
+                {
+                    "name": "GetElementInfoIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "entity",
+                            "type": "ENTITIES",
+                            "confirmationRequired":  false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.501836848727.427035787767"
+                            }
+                        },
+                        {
+                            "name": "entityID",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired":  false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.501836848727.735956876853"
+                            }
+                        },
+                        {
+                            "name": "propName",
+                            "type": "PROPERTIES",
+                            "confirmationRequired":  false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.501836848727.889738133545"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "CreateInterventionIntent",
                     "confirmationRequired": false,
@@ -297,6 +379,57 @@
                     {
                         "type": "PlainText",
                         "value": "Do you want me to notify the technical specialist of that ?"
+                    }
+                ]
+            },
+            {
+                "id":  "Elicit.Slot.501836848727.427035787767",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I need the name of that element, may you give it to me"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "in order to prceed I need the element name, can you give it to me"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what is the element you requesting information from"
+                    }
+                ]
+            },
+            {
+                "id":  "Elicit.Slot.501836848727.735956876853",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what's the id of that element"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what's the id of that {entity}"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "in order to give you the correct information I need the ID, can you give it to me"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.501836848727.889738133545",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "can you tell me the property you want to know about"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what's to property you want to know about"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "in order to proceed I need to known whats to property you want to know about"
                     }
                 ]
             }

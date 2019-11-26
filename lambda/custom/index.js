@@ -2,10 +2,15 @@
 /* eslint-disable  no-console */
 const Alexa = require('ask-sdk');
 
+
 const LaunchRequestHandler = require('./handlers/launchRequestHandler');
+
+const InProgressGetEntityInfoIntentHandler = require('./handlers/inProgressGetInfoIntentHandler')
+const GetEntityInfoIntentHandler = require('./handlers/getEntityInfoIntentHandler')
 const GetSummaryIntentHandler = require('./handlers/getSummaryIntentHandler');
 const InProgressCreateInterventionHandler = require('./handlers/inProgressCreateInterventionHandler');
 const CreateInterventionHandler = require('./handlers/createInterventionHandler');
+
 const HelpIntentHandler = require('./handlers/helpIntentHandler');
 const CancelAndStopIntentHandler = require('./handlers/cancelAndStopIntentHandler');
 const SessionEndedRequestHandler = require('./handlers/sessionEndedRequestHandler');
@@ -16,6 +21,8 @@ const skillBuilder = Alexa.SkillBuilders.standard();
 exports.handler = skillBuilder
 	.addRequestHandlers(
 		LaunchRequestHandler,
+		InProgressGetEntityInfoIntentHandler,
+		GetEntityInfoIntentHandler,
 		GetSummaryIntentHandler,
 		InProgressCreateInterventionHandler,
 		CreateInterventionHandler,

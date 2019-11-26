@@ -1,6 +1,5 @@
 /* eslint-disable  func-names */
 /* eslint-disable  no-console */
-
 const Alexa = require('ask-sdk');
 
 const LaunchRequestHandler = require('./handlers/launchRequestHandler');
@@ -15,14 +14,14 @@ const ErrorHandler = require('./handlers/errorHandler');
 const skillBuilder = Alexa.SkillBuilders.standard();
 
 exports.handler = skillBuilder
-  .addRequestHandlers(
-    LaunchRequestHandler,
-    GetSummaryIntentHandler,
-    InProgressCreateInterventionHandler,
-    CreateInterventionHandler,
-    HelpIntentHandler,
-    CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
-  )
-  .addErrorHandlers(ErrorHandler)
-  .lambda();
+	.addRequestHandlers(
+		LaunchRequestHandler,
+		GetSummaryIntentHandler,
+		InProgressCreateInterventionHandler,
+		CreateInterventionHandler,
+		HelpIntentHandler,
+		CancelAndStopIntentHandler,
+		SessionEndedRequestHandler
+	)
+	.addErrorHandlers(ErrorHandler)
+	.lambda();

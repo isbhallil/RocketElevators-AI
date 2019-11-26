@@ -1,9 +1,9 @@
-const client = require('twilio')("AC221e628d23f16051361563539e040a4b", "e34f37f152128864a8d239e6817d25c3");
+const client = require('twilio')("AC29f00d350501a2be0b9532c3dcce09f8", "07836e0e1f8f31caee608542cdd6c395");
 
 module.exports = async (message, to) => {
-    return await client.messages.create({
+    await client.messages.create({
         body: message,
-        from: "+18722411501",
+        from: "+15035361200",
         to: to
     })
 }

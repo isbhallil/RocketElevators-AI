@@ -14,7 +14,7 @@ module.exports = {
 		let propName = intentSlots.propName.value;
 
 		let requestedEntity = await http('get', 'https://mohammedrestapi.azurewebsites.net/api/alexa', `info/entity=${entity}&entityID=${entityID}`)
-		let speechText = `here's the ${propName} for that ${entity} ${entityID} is ${requestedEntity[propName]}`
+		let speechText = `the ${propName} for ${entity} ${entityID} is ${requestedEntity[propName]}`
 
 		return responseBuilder
 				.speak(speechText)

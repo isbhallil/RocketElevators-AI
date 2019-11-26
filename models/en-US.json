@@ -23,38 +23,38 @@
                     "name": "CreateInterventionIntent",
                     "slots": [
                         {
-                            "name": "elementId",
+                            "name": "entityID",
                             "type": "AMAZON.NUMBER",
                             "samples": [
-                                "it's the {element} {elementId}",
-                                "it's for {element} {elementId}",
-                                "it's for {element} {elementId} and employee {employeeId}",
-                                "yesy it's {elementId}",
-                                "the element id is {elementId}",
-                                "{elementId}",
-                                "it's {elementId} with employee {elementId}",
-                                "it's {elementId} "
+                                "it's the {entity} {entityID}",
+                                "it's for {entity} {entityID}",
+                                "it's for {entity} {entityID} and employee {employeeId}",
+                                "yesy it's {entityID}",
+                                "the element id is {entityID}",
+                                "{entityID}",
+                                "it's {entityID} with employee {entityID}",
+                                "it's {entityID} "
                             ]
                         },
                         {
                             "name": "employeeId",
                             "type": "AMAZON.NUMBER",
                             "samples": [
-                                "it will be employee {employeeId} on {element} {elementId}",
+                                "it will be employee {employeeId} on {entity} {entityID}",
                                 "it will be employee {employeeId}",
                                 "yes it's {employeeId}",
                                 "it's {employeeId}"
                             ]
                         },
                         {
-                            "name": "element",
-                            "type": "LIST_OF_ELEMENTS",
+                            "name": "entity",
+                            "type": "ENTITIES",
                             "samples": [
-                                "it's for {element} {elementId}",
-                                "it's for {element} {elementId} and employee {employeeId}",
-                                "it will be employee {employeeId} that will work on {element} {elementId}",
-                                "it's the {element} {elementId}",
-                                "it's the {element}"
+                                "it's for {entity} {entityID}",
+                                "it's for {entity} {entityID} and employee {employeeId}",
+                                "it will be employee {employeeId} that will work on {entity} {entityID}",
+                                "it's the {entity} {entityID}",
+                                "it's the {entity}"
                             ]
                         },
                         {
@@ -70,11 +70,12 @@
                         }
                     ],
                     "samples": [
+                        "create an intervention on {entity} {employeeId}",
                         "create intervention with the employee {employeeId}",
                         "create intervention",
-                        "create intervention for {element} {elementId}",
+                        "create intervention for {entity} {entityID}",
                         "create intervention with employee {employeeId}",
-                        "create intervention for {element} {elementId} with employee {employeeId}"
+                        "create intervention for {entity} {entityID} with employee {employeeId}"
                     ]
                 },
                 {
@@ -86,35 +87,6 @@
                 }
             ],
             "types": [
-                {
-                    "name": "LIST_OF_ELEMENTS",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "battery",
-                                "synonyms": [
-                                    "batteries"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "column",
-                                "synonyms": [
-                                    "columns"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "elevator",
-                                "synonyms": [
-                                    "elevators"
-                                ]
-                            }
-                        }
-                    ]
-                },
                 {
                     "name": "BOOLEAN",
                     "values": [
@@ -142,6 +114,66 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "PROPERTIES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "informations"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "notes"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "email"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "status"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ENTITIES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "customer"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "employee"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "elevator"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "column"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "battery"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "intervention"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -153,7 +185,7 @@
                     "prompts": {},
                     "slots": [
                         {
-                            "name": "elementId",
+                            "name": "entityID",
                             "type": "AMAZON.NUMBER",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
@@ -171,8 +203,8 @@
                             }
                         },
                         {
-                            "name": "element",
-                            "type": "LIST_OF_ELEMENTS",
+                            "name": "entity",
+                            "type": "ENTITIES",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {

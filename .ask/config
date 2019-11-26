@@ -21,7 +21,7 @@
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "287b5882b7fa7b33dfe578afac528342"
+            "eTag": "659588f1a7f3df016ab840f721baac0e"
           }
         },
         "lambda": [
@@ -34,7 +34,7 @@
             "codeUri": "./lambda/custom",
             "functionName": "rocket-elevator-ai",
             "handler": "index.handler",
-            "revisionId": "a70bda6b-e1fe-4aa0-9ac3-5d61eccec673",
+            "revisionId": "4913d4f3-3889-4907-9acb-fd339046ea5e",
             "runtime": "nodejs8.10"
           }
         ]

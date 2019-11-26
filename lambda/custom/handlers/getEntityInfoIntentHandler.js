@@ -1,13 +1,23 @@
+const http = require('../modules/http');
+
 module.exports = {
 	canHandle(handlerInput) {
 		return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
 				handlerInput.requestEnvelope.request.intent.name === 'GetElementInfoIntent';
 	},
 	async handle(handlerInput) {
-			let speechText = "test is working fine !"
+		const responseBuilder = handlerInput.responseBuilder;
+		const intentSlots = handlerInput.requestEnvelope.request.intent.slots;
 
-			return handlerInput.responseBuilder
-					.speak(speechText)
-					.getResponse();
+		let entity = intentSlots.entity.value;
+		let entityID = intentSlots.entityID.value;
+		let propName = intentSlots.propName.value;
+
+		let requestedEntity = await http('get', 'https://mohammedrestapi.azurewebsites.net/api/alexa', `info/entity=${entity}&entityID=${entityID}`)
+		let speechText = `here's the ${propName} for that ${entity} ${entityID} is ${requestedEntity[propName]}`
+
+		return responseBuilder
+				.speak(speechText)
+				.getResponse();
 	}
 }

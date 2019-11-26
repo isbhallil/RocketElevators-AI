@@ -1,4 +1,4 @@
-const client = require('twilio')(process.env.twilioAccountSid, process.env.twilioAuthToken);
+const client = require('twilio')(process.env['twilioAccountSid'], process.env['twilioAuthToken']);
 
 module.exports = async (message, to) => {
     await client.messages.create({
